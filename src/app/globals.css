@@ -1,49 +1,560 @@
+/* Design tokens. The look is a printed engineering document:
+   paper background, serif text, monospace for labels and data, one accent ink. */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --paper: #faf8f3;
+  --wash: #f2efe7;
+  --ink: #17181c;
+  --muted: #5b5e66;
+  --rule: #d9d5ca;
+  --accent: #b5391e;
+
+  --serif: var(--font-serif), Georgia, "Times New Roman", serif;
+  --mono: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --margin-col: 208px;
+  --col-gap: 56px;
+  --measure: 680px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 html {
-  height: 100%;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-padding-top: 24px;
 }
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 body {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 1.1875rem;
+  line-height: 1.62;
+  font-kerning: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
+h1,
+h2,
+h3,
+p,
+ul,
+dl,
+dd,
+figure {
   margin: 0;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
 }
 
 a {
   color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.2em;
+}
+
+a:hover {
+  color: var(--accent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+.skip {
+  position: absolute;
+  left: 16px;
+  top: -64px;
+  padding: 8px 12px;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--mono);
+  font-size: 0.8125rem;
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+.skip:focus {
+  top: 16px;
+}
+
+/* ---------- Layout ---------- */
+
+.wrap {
+  max-width: 1040px;
+  margin-inline: auto;
+  padding-inline: 32px;
+}
+
+/* Every block is a two-column row: a narrow margin for labels and data,
+   and a text column held to a readable measure. */
+.row {
+  display: grid;
+  grid-template-columns: var(--margin-col) minmax(0, var(--measure));
+  column-gap: var(--col-gap);
+}
+
+.label {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.data {
+  font-family: var(--mono);
+  font-size: 0.84375rem;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+/* ---------- Top bar ---------- */
+
+.top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+  padding-block: 28px 24px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.brand {
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.top nav {
+  display: flex;
+  gap: 28px;
+}
+
+.top nav a {
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.top nav a:hover {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+}
+
+/* ---------- Intro ---------- */
+
+.intro {
+  padding-top: 88px;
+}
+
+.intro h1 {
+  font-size: clamp(2.375rem, 4.4vw + 0.5rem, 3.75rem);
+  line-height: 1.07;
+  letter-spacing: -0.018em;
+  font-weight: 580;
+  text-wrap: balance;
+  margin-bottom: 36px;
+}
+
+.intro .kicker {
+  margin-bottom: 20px;
+  color: var(--accent);
+}
+
+.lede {
+  font-size: 1.375rem;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.meta {
+  padding-top: 6px;
+  display: grid;
+  gap: 20px;
+}
+
+.meta dt {
+  margin-bottom: 2px;
+}
+
+.status::before {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  vertical-align: 1px;
+}
+
+/* ---------- At a glance ---------- */
+
+.glance {
+  padding-top: 72px;
+}
+
+.glance .label.side {
+  padding-top: 14px;
+}
+
+.figures {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px;
+  padding-block: 8px 28px;
+}
+
+.figures .num {
+  display: block;
+  font-size: 3.75rem;
+  line-height: 1;
+  font-weight: 580;
+  letter-spacing: -0.025em;
+  font-variant-numeric: lining-nums tabular-nums;
+  margin-bottom: 10px;
+}
+
+.figures .label {
+  display: block;
+}
+
+.facts > div {
+  display: grid;
+  grid-template-columns: 148px minmax(0, 1fr);
+  gap: 20px;
+  padding-block: 12px;
+  border-top: 1px solid var(--rule);
+}
+
+.facts > div:last-child {
+  border-bottom: 1px solid var(--rule);
+}
+
+.facts dt {
+  padding-top: 2px;
+}
+
+/* ---------- Sections ---------- */
+
+.section {
+  margin-top: 104px;
+  padding-top: 28px;
+  border-top: 1px solid var(--ink);
+}
+
+.section .num {
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  color: var(--accent);
+  padding-top: 11px;
+}
+
+.section h2 {
+  font-size: 2rem;
+  line-height: 1.15;
+  letter-spacing: -0.012em;
+  font-weight: 600;
+}
+
+.section .intro-line {
+  margin-top: 10px;
+  color: var(--muted);
+}
+
+/* ---------- Work entries ---------- */
+
+.entry {
+  padding-block: 36px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.entry .side {
+  padding-top: 8px;
+}
+
+.entry .idx {
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+.entry .tags li {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  line-height: 1.7;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.entry h3 {
+  font-size: 1.75rem;
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.entry .state {
+  margin-top: 14px;
+}
+
+/* ---------- Figure ---------- */
+
+.fig {
+  margin-top: 28px;
+}
+
+.fig .frame {
+  background: var(--wash);
+  border: 1px solid var(--rule);
+  padding: 22px 20px 16px;
+  overflow-x: auto;
+}
+
+.fig svg {
+  display: block;
+  width: 100%;
+  min-width: 560px;
+  height: auto;
+}
+
+.fig figcaption {
+  margin-top: 12px;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+/* ---------- Lists and records ---------- */
+
+.block {
+  padding-block: 32px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.block .side {
+  padding-top: 5px;
+}
+
+.dash li {
+  position: relative;
+  padding-left: 1.4em;
+  margin-bottom: 10px;
+}
+
+.dash li::before {
+  content: "\2014";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+
+.block h3 {
+  font-size: 1.375rem;
+  line-height: 1.25;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.block .sub {
+  margin-bottom: 10px;
+  color: var(--muted);
+}
+
+.block .item + .item {
+  margin-top: 22px;
+}
+
+.note {
+  border: 1px dashed var(--accent);
+  padding: 16px 18px;
+  margin-top: 24px;
+}
+
+.note .label {
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+/* ---------- Contact ---------- */
+
+.contact p {
+  margin-top: 14px;
+}
+
+.contact .links {
+  margin-top: 28px;
+}
+
+.contact .links > div {
+  display: grid;
+  grid-template-columns: 148px minmax(0, 1fr);
+  gap: 20px;
+  padding-block: 12px;
+  border-top: 1px solid var(--rule);
+}
+
+.contact .links > div:last-child {
+  border-bottom: 1px solid var(--rule);
+}
+
+.contact .links dt {
+  padding-top: 4px;
+}
+
+/* ---------- Footer ---------- */
+
+.foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 24px;
+  margin-top: 112px;
+  padding-block: 24px 40px;
+  border-top: 1px solid var(--rule);
+}
+
+/* ---------- Small screens ---------- */
+
+@media (max-width: 860px) {
+  body {
+    font-size: 1.125rem;
+  }
+
+  .wrap {
+    padding-inline: 22px;
+  }
+
+  .row {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 14px;
+  }
+
+  .top nav {
+    gap: 18px;
+  }
+
+  .intro {
+    padding-top: 56px;
+  }
+
+  /* On a phone the headline comes first and the margin data follows it. */
+  .intro .side {
+    order: 2;
+    margin-top: 24px;
+    padding-top: 22px;
+    border-top: 1px solid var(--rule);
+  }
+
+  .meta {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px 20px;
+    padding-top: 0;
+  }
+
+  .lede {
+    font-size: 1.25rem;
+  }
+
+  .glance {
+    padding-top: 48px;
+  }
+
+  .glance .label.side,
+  .section .num,
+  .entry .side,
+  .block .side {
+    padding-top: 0;
+  }
+
+  .figures .num {
+    font-size: 3rem;
+  }
+
+  .facts > div,
+  .contact .links > div {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2px;
+  }
+
+  .section {
+    margin-top: 72px;
+  }
+
+  .section h2 {
+    font-size: 1.75rem;
+  }
+
+  .entry .side {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 14px;
+  }
+
+  .entry .idx {
+    margin-bottom: 0;
+  }
+
+  .entry .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 14px;
+  }
+
+  .entry h3 {
+    font-size: 1.5rem;
+  }
+
+  .foot {
+    margin-top: 80px;
+  }
+}
+
+@media (max-width: 420px) {
+  .top {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+@media print {
+  body {
+    background: #fff;
+  }
+
+  .top nav,
+  .skip {
+    display: none;
   }
 }
