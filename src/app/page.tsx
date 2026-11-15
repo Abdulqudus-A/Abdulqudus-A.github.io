@@ -2,14 +2,16 @@ import Link from "next/link";
 import { RecoveryFigure } from "../components/RecoveryFigure";
 import {
   alsoShipped,
+  designDocs,
   education,
   glance,
   headline,
   lede,
+  press,
   profile,
   record,
-  selectedWork,
   sideProjects,
+  writing,
 } from "../content/site";
 
 export default function Home() {
@@ -22,7 +24,7 @@ export default function Home() {
           {profile.name}
         </Link>
         <nav aria-label="Sections">
-          <a href="#work">Work</a>
+          <a href="#work">Systems</a>
           <a href="#record">Record</a>
           <a href="#writing">Writing</a>
           <a href="#contact">Contact</a>
@@ -89,26 +91,31 @@ export default function Home() {
           <div className="section row">
             <p className="num">§1</p>
             <div>
-              <h2 id="work-title">Selected work</h2>
-              <p className="intro-line">Four systems, each with a problem worth explaining.</p>
+              <h2 id="work-title">System design</h2>
+              <p className="intro-line">
+                Four systems, each written up as a design doc: the constraints, the architecture, the decisions and what
+                happens when something fails.
+              </p>
             </div>
           </div>
 
-          {selectedWork.map((work, i) => (
-            <article className="entry row" key={work.slug}>
+          {designDocs.map((doc, i) => (
+            <article className="entry row" key={doc.slug}>
               <div className="side">
-                <p className="idx">1.{i + 1}</p>
+                <p className="idx">
+                  1.{i + 1} · {doc.context}
+                </p>
                 <ul className="tags">
-                  {work.tags.map((tag) => (
+                  {doc.tags.map((tag) => (
                     <li key={tag}>{tag}</li>
                   ))}
                 </ul>
               </div>
               <div>
-                <h3>{work.published ? <a href={`/work/${work.slug}/`}>{work.title}</a> : work.title}</h3>
-                <p>{work.summary}</p>
+                <h3>{doc.published ? <Link href={`/systems/${doc.slug}/`}>{doc.title}</Link> : doc.title}</h3>
+                <p>{doc.summary}</p>
                 {i === 0 && <RecoveryFigure />}
-                {!work.published && <p className="label state">Case study in progress</p>}
+                {!doc.published && <p className="label state">Design doc in progress</p>}
               </div>
             </article>
           ))}
@@ -150,9 +157,7 @@ export default function Home() {
                   <h3>
                     <a href={p.url}>{p.name}</a>
                   </h3>
-                  <p className="data sub">
-                    {p.role} · {p.host}
-                  </p>
+                  <p className="data sub">{p.role ? `${p.role} · ${p.host}` : p.host}</p>
                   <p>{p.note}</p>
                 </div>
               ))}
@@ -175,10 +180,36 @@ export default function Home() {
             <p className="num">§3</p>
             <div>
               <h2 id="writing-title">Writing</h2>
-              <div className="note">
-                <p className="label">Draft note</p>
-                <p>Posts and the press mention are listed here once the blog link and the article are in.</p>
-              </div>
+            </div>
+          </div>
+
+          <div className="block row">
+            <p className="label side">Posts</p>
+            <div>
+              <ul className="dash">
+                {writing.map((post) => (
+                  <li key={post.url}>
+                    <a href={post.url}>{post.title}</a>
+                  </li>
+                ))}
+              </ul>
+              <p className="more">
+                <a href={profile.links.medium}>All posts on Medium</a>
+              </p>
+            </div>
+          </div>
+
+          <div className="block row press">
+            <p className="label side">Press</p>
+            <div>
+              {press.map((item) => (
+                <div className="item" key={item.url}>
+                  <p>
+                    <a href={item.url}>{item.title}</a>
+                  </p>
+                  <p className="data sub">{item.date ? `${item.outlet} · ${item.date}` : item.outlet}</p>
+                </div>
+              ))}
             </div>
           </div>
         </section>

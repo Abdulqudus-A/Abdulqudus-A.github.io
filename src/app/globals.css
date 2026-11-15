@@ -395,6 +395,14 @@ a:hover {
   margin-top: 22px;
 }
 
+.block .more {
+  margin-top: 14px;
+}
+
+.press .sub {
+  margin: 4px 0 0;
+}
+
 .note {
   border: 1px dashed var(--accent);
   padding: 16px 18px;
