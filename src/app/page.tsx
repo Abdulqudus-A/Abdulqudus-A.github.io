@@ -1,5 +1,7 @@
 import Link from "next/link";
+import { Footer } from "../components/Footer";
 import { RecoveryFigure } from "../components/RecoveryFigure";
+import { TopBar } from "../components/TopBar";
 import {
   alsoShipped,
   designDocs,
@@ -19,17 +21,7 @@ export default function Home() {
 
   return (
     <div className="wrap">
-      <header className="top">
-        <Link className="brand" href="/">
-          {profile.name}
-        </Link>
-        <nav aria-label="Sections">
-          <a href="#work">Systems</a>
-          <a href="#record">Record</a>
-          <a href="#writing">Writing</a>
-          <a href="#contact">Contact</a>
-        </nav>
-      </header>
+      <TopBar />
 
       <main id="main">
         <section className="intro row" aria-labelledby="headline">
@@ -115,7 +107,13 @@ export default function Home() {
                 <h3>{doc.published ? <Link href={`/systems/${doc.slug}/`}>{doc.title}</Link> : doc.title}</h3>
                 <p>{doc.summary}</p>
                 {i === 0 && <RecoveryFigure />}
-                {!doc.published && <p className="label state">Design doc in progress</p>}
+                {doc.published ? (
+                  <p className="read">
+                    <Link href={`/systems/${doc.slug}/`}>Read the design doc</Link>
+                  </p>
+                ) : (
+                  <p className="label state">Design doc in progress</p>
+                )}
               </div>
             </article>
           ))}
@@ -251,10 +249,7 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="foot">
-        <p className="label">© 2026 {profile.name}</p>
-        <p className="label">Pre-rendered HTML · Self-hosted fonts · No trackers</p>
-      </footer>
+      <Footer />
     </div>
   );
 }

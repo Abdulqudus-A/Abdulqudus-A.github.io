@@ -78,10 +78,10 @@ export const designDocs: DesignDoc[] = [
     slug: "data-connectors",
     title: "Connectors that survive other people’s APIs",
     summary:
-      "TypeScript and Node.js connectors that pull marketing and ads data from third-party platforms into BigQuery, handling authentication, pagination, rate limits, retries and schema changes on the other side.",
-    context: "RocketDevs",
+      "A reference design for loading marketing and ads data from many third-party platforms into one warehouse, so that one report can cover every source: pagination, rate limits, retries and schema changes on the other side.",
+    context: "Reference design",
     tags: ["Data pipelines", "BigQuery"],
-    published: false,
+    published: true,
   },
 ];
 

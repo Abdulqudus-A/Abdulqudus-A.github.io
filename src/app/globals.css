@@ -333,7 +333,7 @@ a:hover {
   margin-top: 28px;
 }
 
-.fig .frame {
+.frame {
   background: var(--wash);
   border: 1px solid var(--rule);
   padding: 22px 20px 16px;
@@ -452,6 +452,323 @@ a:hover {
   border-top: 1px solid var(--rule);
 }
 
+/* ---------- Design docs ---------- */
+
+.doc-head {
+  padding-top: 72px;
+}
+
+.doc-head h1 {
+  font-size: clamp(2.125rem, 3.4vw + 0.5rem, 3.125rem);
+  line-height: 1.1;
+  letter-spacing: -0.016em;
+  font-weight: 580;
+  text-wrap: balance;
+  margin-bottom: 24px;
+}
+
+.doc-head .kicker {
+  margin-bottom: 18px;
+  color: var(--accent);
+}
+
+.doc-head .kicker a {
+  text-decoration: none;
+}
+
+.doc-head .kicker a:hover {
+  text-decoration: underline;
+}
+
+.doc-head .lede {
+  margin-bottom: 0;
+}
+
+.doc .section {
+  margin-top: 72px;
+}
+
+.prose h2 + * {
+  margin-top: 18px;
+}
+
+.prose p + p {
+  margin-top: 1em;
+}
+
+.prose .dash li:last-child {
+  margin-bottom: 0;
+}
+
+.question {
+  font-size: 1.75rem;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  font-weight: 560;
+  text-wrap: balance;
+  padding-left: 20px;
+  border-left: 3px solid var(--accent);
+}
+
+.parts {
+  margin-top: 28px;
+}
+
+.parts > div,
+.decision dl > div {
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr);
+  gap: 20px;
+  padding-block: 11px;
+  border-top: 1px solid var(--rule);
+}
+
+.parts > div:last-child,
+.decision dl > div:last-child {
+  border-bottom: 1px solid var(--rule);
+}
+
+.parts dt,
+.decision dt {
+  padding-top: 4px;
+}
+
+.decision {
+  margin-top: 36px;
+}
+
+.decision h3 {
+  font-size: 1.375rem;
+  line-height: 1.25;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+.decision h3 .n {
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: var(--accent);
+  margin-right: 12px;
+  vertical-align: 2px;
+}
+
+.doc-nav {
+  margin-top: 72px;
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+}
+
+.doc-nav a::before {
+  content: "\2190\00a0";
+}
+
+/* ---------- Diagrams ---------- */
+
+.dg {
+  display: block;
+  width: 100%;
+  min-width: 600px;
+  height: auto;
+}
+
+.dg-node rect {
+  fill: var(--paper);
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+
+.dg-node text {
+  font-family: var(--mono);
+  font-size: 13px;
+  fill: var(--ink);
+}
+
+.dg-node.is-external rect {
+  stroke-dasharray: 5 4;
+}
+
+.dg-node.is-active rect {
+  fill: var(--ink);
+}
+
+.dg-node.is-active text {
+  fill: var(--paper);
+}
+
+.dg-node.is-failed rect {
+  fill: #f8e3dc;
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+
+.dg-node.is-failed text {
+  fill: var(--accent);
+  font-weight: 500;
+}
+
+.dg-node.is-dim rect {
+  stroke: #bdb8ab;
+}
+
+.dg-node.is-dim text {
+  fill: #7b7d84;
+}
+
+.dg-line {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+
+.dg-head {
+  fill: var(--ink);
+}
+
+.dg-elabel {
+  font-family: var(--mono);
+  font-size: 11px;
+  fill: var(--muted);
+}
+
+.dg-edge.is-active .dg-line {
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+
+.dg-edge.is-active .dg-head {
+  fill: var(--accent);
+}
+
+.dg-edge.is-active .dg-elabel {
+  fill: var(--accent);
+}
+
+.dg-edge.is-dim .dg-line {
+  stroke: #bdb8ab;
+}
+
+.dg-edge.is-dim .dg-head {
+  fill: #bdb8ab;
+}
+
+.dg-edge.is-dim .dg-elabel {
+  fill: #7b7d84;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .dg-node rect,
+  .dg-node text,
+  .dg-line,
+  .dg-head {
+    transition:
+      fill 0.25s ease,
+      stroke 0.25s ease;
+  }
+}
+
+/* ---------- Walkthrough ---------- */
+
+.walk {
+  margin-top: 24px;
+}
+
+.walk-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.walk-controls button {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  padding: 8px 14px;
+  cursor: pointer;
+}
+
+.walk-controls button:hover:not(:disabled) {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.walk-controls button:disabled {
+  color: #8f9197;
+  border-color: var(--rule);
+  cursor: default;
+}
+
+.walk-controls .label {
+  margin-left: 8px;
+}
+
+.walk-steps {
+  list-style: none;
+  padding: 0;
+  margin: 24px 0 0;
+}
+
+.walk-steps li {
+  padding: 4px 0 18px 20px;
+  border-left: 2px solid var(--rule);
+  color: var(--muted);
+}
+
+.walk-steps li:last-child {
+  padding-bottom: 4px;
+}
+
+.walk-steps li.is-current {
+  border-left-color: var(--accent);
+  color: var(--ink);
+}
+
+.walk-steps button {
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin: 0 0 4px;
+  background: none;
+  border: 0;
+  font-family: var(--serif);
+  font-size: 1.1875rem;
+  font-weight: 600;
+  line-height: 1.35;
+  text-align: left;
+  color: inherit;
+  cursor: pointer;
+}
+
+.walk-steps button:hover {
+  color: var(--accent);
+}
+
+.walk-steps .n {
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: var(--accent);
+  margin-right: 12px;
+  vertical-align: 1px;
+}
+
+.entry .read {
+  margin-top: 14px;
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+}
+
+.entry .read a::after {
+  content: "\00a0\2192";
+}
+
 /* ---------- Small screens ---------- */
 
 @media (max-width: 860px) {
@@ -546,6 +863,36 @@ a:hover {
 
   .foot {
     margin-top: 80px;
+  }
+
+  .doc-head {
+    padding-top: 48px;
+  }
+
+  .doc-head .side {
+    order: 2;
+    margin-top: 8px;
+    padding-top: 22px;
+    border-top: 1px solid var(--rule);
+  }
+
+  .doc .section {
+    margin-top: 56px;
+  }
+
+  .question {
+    font-size: 1.5rem;
+  }
+
+  .parts > div,
+  .decision dl > div {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2px;
+  }
+
+  .parts dt,
+  .decision dt {
+    padding-top: 0;
   }
 }
 
