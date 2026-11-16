@@ -1,20 +1,35 @@
-"use client";
+import type { DiagramDef } from "../../components/diagrams/Diagram";
+import type { WalkStep } from "../../components/diagrams/DiagramWalkthrough";
 
-import { WalkControls, WalkSteps, useWalkthrough } from "../Walkthrough";
-import { PipelineDiagram, type EdgeId, type NodeId, type Tone } from "./PipelineDiagram";
-
-type Step = {
-  title: string;
-  body: string;
-  active: NodeId[];
-  failed?: NodeId[];
-  edges: EdgeId[];
+export const connectorsDiagram: DiagramDef = {
+  width: 680,
+  height: 272,
+  label:
+    "Architecture: a scheduler puts sync jobs on a queue. A connector worker calls the third-party API, saves its cursor in sync state and writes each page to raw landing. A transform maps raw records to a shared model and merges them into the warehouse, which the report queries.",
+  nodes: {
+    scheduler: { x: 12, y: 16, w: 120, label: "Scheduler" },
+    queue: { x: 172, y: 16, w: 120, label: "Job queue" },
+    connector: { x: 332, y: 16, w: 120, label: "Connector" },
+    api: { x: 508, y: 16, w: 160, label: "Third-party API", external: true },
+    state: { x: 508, y: 104, w: 160, label: "Sync state" },
+    raw: { x: 12, y: 212, w: 120, label: "Raw landing" },
+    transform: { x: 188, y: 212, w: 120, label: "Transform" },
+    warehouse: { x: 364, y: 212, w: 120, label: "Warehouse" },
+    report: { x: 548, y: 212, w: 120, label: "Report" },
+  },
+  edges: {
+    enqueue: { d: "M 132 38 H 164", label: "job", lx: 148, ly: 30 },
+    lease: { d: "M 292 38 H 324" },
+    call: { d: "M 460 38 H 500", both: true },
+    cursor: { d: "M 420 60 V 126 H 500", label: "cursor", lx: 460, ly: 118 },
+    land: { d: "M 372 60 V 176 H 72 V 204", label: "pages, as received", lx: 222, ly: 168 },
+    toTransform: { d: "M 132 234 H 180" },
+    merge: { d: "M 308 234 H 356", label: "merge", lx: 332, ly: 226 },
+    query: { d: "M 484 234 H 540" },
+  },
 };
 
-const ALL_NODES: NodeId[] = ["scheduler", "queue", "connector", "api", "state", "raw", "transform", "warehouse", "report"];
-const ALL_EDGES: EdgeId[] = ["enqueue", "lease", "call", "cursor", "land", "toTransform", "merge", "query"];
-
-const STEPS: Step[] = [
+export const connectorsSteps: WalkStep[] = [
   {
     title: "A sync is due",
     body: "The scheduler finds that one account on one platform is due and puts a single job on the queue. The job names the connector, the account and the stream, and nothing else.",
@@ -55,31 +70,3 @@ const STEPS: Step[] = [
     edges: ["toTransform", "merge", "query"],
   },
 ];
-
-function tones(step: Step) {
-  const nodes: Partial<Record<NodeId, Tone>> = {};
-  for (const id of ALL_NODES) {
-    nodes[id] = step.failed?.includes(id) ? "failed" : step.active.includes(id) ? "active" : "dim";
-  }
-  const edges: Partial<Record<EdgeId, Tone>> = {};
-  for (const id of ALL_EDGES) {
-    edges[id] = step.edges.includes(id) ? "active" : "dim";
-  }
-  return { nodes, edges };
-}
-
-export function ConnectorsWalkthrough() {
-  const walk = useWalkthrough(STEPS.length);
-  const step = STEPS[walk.index];
-  const { nodes, edges } = tones(step);
-
-  return (
-    <div className="walk">
-      <div className="frame">
-        <PipelineDiagram nodes={nodes} edges={edges} label={`Step ${walk.index + 1}: ${step.title}. ${step.body}`} />
-      </div>
-      <WalkControls index={walk.index} count={STEPS.length} playing={walk.playing} go={walk.go} toggle={walk.toggle} />
-      <WalkSteps steps={STEPS} index={walk.index} go={walk.go} />
-    </div>
-  );
-}

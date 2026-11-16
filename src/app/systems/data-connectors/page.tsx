@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Decisions, type Decision } from "../../../components/Decisions";
 import { Footer } from "../../../components/Footer";
 import { TopBar } from "../../../components/TopBar";
-import { ConnectorsWalkthrough } from "../../../components/diagrams/ConnectorsWalkthrough";
-import { PipelineDiagram } from "../../../components/diagrams/PipelineDiagram";
+import { Diagram } from "../../../components/diagrams/Diagram";
+import { DiagramWalkthrough } from "../../../components/diagrams/DiagramWalkthrough";
+import { connectorsDiagram, connectorsSteps } from "../../../content/diagrams/connectors";
 
 const title = "Connectors that survive other people’s APIs";
 const dek =
@@ -37,25 +39,25 @@ const parts: { name: string; text: string }[] = [
   { name: "Report", text: "Queries the shared model, so it works for any mix of sources without knowing which ones exist." },
 ];
 
-const decisions: { title: string; chose: string; rejected: string; why: string; cost: string }[] = [
+const decisions: Decision[] = [
   {
     title: "Land raw data first, transform second",
     chose: "Write each API page to raw storage untouched, then transform it as a separate step.",
-    rejected: "Transforming inside the connector and loading only the clean result.",
+    alt: "Transforming inside the connector and loading only the clean result.",
     why: "When a mapping is wrong or a source changes shape, the fix is a rerun of the transform. It needs no API calls, spends no rate limit, and does not depend on the source still serving old data.",
     cost: "More storage, and a second step to operate and monitor.",
   },
   {
     title: "Merge on a natural key",
     chose: "Load through a merge keyed on source, account, campaign and date.",
-    rejected: "Appending every sync and removing duplicates inside the report queries.",
+    alt: "Appending every sync and removing duplicates inside the report queries.",
     why: "A retry and a re-pull both become harmless: the same key replaces the same row. Every query against the warehouse stays simple.",
     cost: "A merge costs more than an append. Partitioning by date limits each merge to the days being synced.",
   },
   {
     title: "Re-pull a trailing window on every sync",
     chose: "Sync forward from the cursor, and also re-pull the last few days. The window is set per connector.",
-    rejected: "A strict “only what is new since the cursor”, and a full refresh on every run.",
+    alt: "A strict “only what is new since the cursor”, and a full refresh on every run.",
     why: "The strict cursor misses revised numbers. The full refresh is slow and burns the rate limit. The window catches revisions at a known, bounded cost.",
     cost: "The same days are fetched more than once. The merge makes that safe, not free.",
   },
@@ -156,7 +158,7 @@ export default function DataConnectorsDoc() {
             </p>
             <figure className="fig">
               <div className="frame">
-                <PipelineDiagram />
+                <Diagram def={connectorsDiagram} />
               </div>
               <figcaption>
                 Fig. 1. One sync, end to end. Retries, rate limiting, state and logging live in a shared runtime around
@@ -178,32 +180,7 @@ export default function DataConnectorsDoc() {
           <p className="num">§5</p>
           <div className="prose">
             <h2 id="s5">Decisions</h2>
-            {decisions.map((d, i) => (
-              <div className="decision" key={d.title}>
-                <h3>
-                  <span className="n">5.{i + 1}</span>
-                  {d.title}
-                </h3>
-                <dl>
-                  <div>
-                    <dt className="label">Chose</dt>
-                    <dd>{d.chose}</dd>
-                  </div>
-                  <div>
-                    <dt className="label">Rejected</dt>
-                    <dd>{d.rejected}</dd>
-                  </div>
-                  <div>
-                    <dt className="label">Why</dt>
-                    <dd>{d.why}</dd>
-                  </div>
-                  <div>
-                    <dt className="label">Cost</dt>
-                    <dd>{d.cost}</dd>
-                  </div>
-                </dl>
-              </div>
-            ))}
+            <Decisions items={decisions} section={5} />
           </div>
         </section>
 
@@ -212,7 +189,7 @@ export default function DataConnectorsDoc() {
           <div className="prose">
             <h2 id="s6">What happens when it fails</h2>
             <p>Six moments in the life of one sync. Step through them, or press play.</p>
-            <ConnectorsWalkthrough />
+            <DiagramWalkthrough def={connectorsDiagram} steps={connectorsSteps} />
           </div>
         </section>
 
