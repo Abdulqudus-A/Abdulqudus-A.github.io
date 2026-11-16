@@ -83,6 +83,15 @@ export const designDocs: DesignDoc[] = [
     tags: ["Data pipelines", "BigQuery"],
     published: true,
   },
+  {
+    slug: "multi-tenant-crm",
+    title: "One database, many dealerships",
+    summary:
+      "A CRM for a direct-sales network. Eleven dealerships in three European countries share one Postgres database, and row-level security decides who can see what.",
+    context: "Client work",
+    tags: ["Multi-tenancy", "Postgres"],
+    published: true,
+  },
 ];
 
 export const alsoShipped: string[] = [

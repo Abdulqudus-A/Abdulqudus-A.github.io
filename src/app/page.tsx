@@ -85,7 +85,7 @@ export default function Home() {
             <div>
               <h2 id="work-title">System design</h2>
               <p className="intro-line">
-                Four systems, each written up as a design doc: the constraints, the architecture, the decisions and what
+                Each system is written up as a design doc: the constraints, the architecture, the decisions and what
                 happens when something fails.
               </p>
             </div>
