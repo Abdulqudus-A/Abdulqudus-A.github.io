@@ -69,7 +69,7 @@ export const designDocs: DesignDoc[] = [
     slug: "feedback-pipeline",
     title: "From raw feedback to a ranked list of problems",
     summary:
-      "The pipeline behind Reavil. Each piece of user feedback is scored by a model, grouped with similar feedback by embedding similarity and ranked, so a product team sees its biggest problem first.",
+      "The pipeline behind Reavil. Each piece of user feedback is enriched and scored by a model, grouped with similar feedback by embedding similarity and ranked, so a product team sees its biggest problem first.",
     context: "Reavil",
     tags: ["AI pipeline", "Queues"],
     published: true,
