@@ -48,13 +48,13 @@ export type DesignDoc = {
 
 export const designDocs: DesignDoc[] = [
   {
-    slug: "checkpoint-recovery",
-    title: "A job that survives its worker",
+    slug: "end-to-end-registration",
+    title: "One registration, end to end",
     summary:
-      "A distributed task queue on RabbitMQ and Bull with checkpoint recovery and idempotent handlers. It processes hundreds of thousands of records a day across horizontally scaled workers, and cut SIM-registration downtime by half.",
+      "How a SIM registration gets from an agent’s device to an active line. It is accepted in one request, then verified and activated on queues, with idempotent handlers, parked records and retries that resume at the step that failed. The pipeline handles hundreds of thousands of records a day, and this design cut registration downtime by half.",
     context: "Seamfix",
-    tags: ["Queues", "Idempotency"],
-    published: false,
+    tags: ["Queues", "Idempotency", "Identity"],
+    published: true,
   },
   {
     slug: "single-session",
