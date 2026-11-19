@@ -19,12 +19,11 @@ export const profile = {
   },
 };
 
-export const headline =
-  "I build the backend behind mobile registrations in Nigeria, passport applications in Benin and dealership sales in Germany.";
+export const headline = "I build backend systems that millions of people use without noticing.";
 
 export const lede = [
-  "I’m a senior backend engineer at Seamfix in Lagos. Since 2023 that has meant the platforms mobile operators use to register and verify their subscribers, among them Globacom, MTN Côte d’Ivoire and Lebara, and a remote e-passport platform for Benin’s Ministry of Foreign Affairs.",
-  "On contract I have built the CRM that eleven dealerships in three European countries run on, and data connectors for a marketing-data platform in the United States. Different domains, the same work: decide where the state lives, make every step safe to repeat, and plan for the dependency that will be down.",
+  "I’m a senior backend engineer at Seamfix. My work runs in production for telecom operators, a government ministry, universities and companies on three continents, and the largest of those systems serve more than 27 million people.",
+  "Different domains, the same work: decide where the state lives, make every step safe to repeat, and plan for the dependency that will be down. Each system below is written up the way I would explain it to another engineer.",
 ];
 
 // Results of my own work. Each one is explained in a design doc below.
@@ -35,8 +34,8 @@ export const figures: { label: string; value: string }[] = [
 ];
 
 export const facts: { label: string; value: string }[] = [
-  { label: "Built for", value: "Mobile operators · a foreign ministry · four universities · eleven dealerships" },
-  { label: "In", value: "Nigeria · Côte d’Ivoire · Benin · Germany · United States" },
+  { label: "Built for", value: "Mobile operators · a government ministry · four universities · eleven dealerships" },
+  { label: "Reach", value: "Africa · Europe · North America" },
   { label: "Operators", value: "Globacom · MTN Côte d’Ivoire · Lebara" },
 ];
 

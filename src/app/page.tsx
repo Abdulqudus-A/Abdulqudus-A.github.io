@@ -51,7 +51,7 @@ export default function Home() {
           </div>
           <div>
             <p className="label kicker">Backend engineer</p>
-            <h1 id="headline" className="long">{headline}</h1>
+            <h1 id="headline">{headline}</h1>
             <p className="lede">{lede[0]}</p>
             <p>{lede[1]}</p>
           </div>
