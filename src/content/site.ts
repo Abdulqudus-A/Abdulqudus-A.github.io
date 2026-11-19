@@ -19,18 +19,25 @@ export const profile = {
   },
 };
 
-export const headline = "I build backend systems that stay correct when things fail.";
+export const headline =
+  "I build the backend behind mobile registrations in Nigeria, passport applications in Benin and dealership sales in Germany.";
 
 export const lede = [
-  "Since 2023 that has meant identity and registration infrastructure at Seamfix, used by telcos including Globacom, MTN Côte d’Ivoire and Lebara and by government programmes in West Africa. The systems I have delivered there have processed more than 50 million registrations for over 27 million subscribers.",
-  "The problems are the ones every high-volume system has: process each record once, know who is asking, and keep going when a worker crashes or a dependency does not answer. I have applied the same thinking to marketing-data pipelines into BigQuery and to the analysis pipeline behind an AI product.",
+  "I’m a senior backend engineer at Seamfix in Lagos. Since 2023 that has meant the platforms mobile operators use to register and verify their subscribers, among them Globacom, MTN Côte d’Ivoire and Lebara, and a remote e-passport platform for Benin’s Ministry of Foreign Affairs.",
+  "On contract I have built the CRM that eleven dealerships in three European countries run on, and data connectors for a marketing-data platform in the United States. Different domains, the same work: decide where the state lives, make every step safe to repeat, and plan for the dependency that will be down.",
 ];
 
-export const glance: { label: string; value: string }[] = [
-  { label: "Registrations processed", value: "50M+" },
-  { label: "Subscribers", value: "27M+" },
+// Results of my own work. Each one is explained in a design doc below.
+export const figures: { label: string; value: string }[] = [
+  { label: "Registration downtime, after the retry design", value: "−50%" },
+  { label: "Services moved to one session model", value: "8+" },
+  { label: "Pull requests across 16 repositories since 2024", value: "500+" },
+];
+
+export const facts: { label: string; value: string }[] = [
+  { label: "Built for", value: "Mobile operators · a foreign ministry · four universities · eleven dealerships" },
+  { label: "In", value: "Nigeria · Côte d’Ivoire · Benin · Germany · United States" },
   { label: "Operators", value: "Globacom · MTN Côte d’Ivoire · Lebara" },
-  { label: "Since Jan 2024", value: "16 repositories · 500+ pull requests · 100+ delivery tickets" },
 ];
 
 // Each entry becomes a design doc: constraints, the design question, the
@@ -63,7 +70,16 @@ export const designDocs: DesignDoc[] = [
       "Single-session sign-on, built once in the auth service and rolled out to more than eight platform microservices and the product front-ends, instead of being rebuilt per product.",
     context: "Seamfix",
     tags: ["Auth", "8+ services"],
-    published: false,
+    published: true,
+  },
+  {
+    slug: "remote-passport",
+    title: "A passport application without the embassy",
+    summary:
+      "A reference design for taking passport applications from citizens abroad, entirely online: liveness the server can trust, a face comparison with three outcomes instead of two, and an officer deciding the cases the system will not decide alone.",
+    context: "Reference design",
+    tags: ["Identity", "Biometrics"],
+    published: true,
   },
   {
     slug: "feedback-pipeline",
@@ -94,9 +110,13 @@ export const designDocs: DesignDoc[] = [
   },
 ];
 
+// "1.3" for the third doc in the list. Pages use this so the numbers follow the order above.
+export function docNumber(slug: string): string {
+  return `1.${designDocs.findIndex((d) => d.slug === slug) + 1}`;
+}
+
 export const alsoShipped: string[] = [
   "SIM-swap validation and a blocking module that locks a number after a rejected or abandoned swap.",
-  "GovSmart: a fully remote e-passport platform for Benin’s Ministry of Foreign Affairs, with facial recognition, liveness detection and similarity scoring.",
   "Certify: a multi-tenant platform that digitises and verifies academic records for four Nigerian universities.",
   "Corporate registration for Globacom, single and bulk, including parent and child structures.",
   "Mobile number portability, including eSIM.",

@@ -6,6 +6,7 @@ import { TopBar } from "../../../components/TopBar";
 import { Diagram } from "../../../components/diagrams/Diagram";
 import { DiagramWalkthrough } from "../../../components/diagrams/DiagramWalkthrough";
 import { connectorsDiagram, connectorsSteps } from "../../../content/diagrams/connectors";
+import { docNumber } from "../../../content/site";
 
 const title = "Connectors that survive other people’s APIs";
 const dek =
@@ -88,7 +89,7 @@ export default function DataConnectorsDoc() {
           </div>
           <div>
             <p className="label kicker">
-              <Link href="/#work">System design</Link> · 1.4
+              <Link href="/#work">System design</Link> · {docNumber("data-connectors")}
             </p>
             <h1>{title}</h1>
             <p className="lede">{dek}</p>

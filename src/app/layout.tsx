@@ -23,14 +23,24 @@ const mono = localFont({
 
 const title = "Abdulqudus Aremu, backend engineer";
 const description =
-  "Senior Software Engineer at Seamfix. I build SIM-registration and identity systems for telcos: case studies, writing and contact.";
+  "Senior backend engineer in Lagos. System design write-ups from work for mobile operators, a foreign ministry, universities and dealerships in five countries.";
+
+// Set NEXT_PUBLIC_SITE_URL at build time once the final address is known.
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://abdulqudus.reavil.io";
 
 export const metadata: Metadata = {
   title: { default: title, template: "%s · Abdulqudus Aremu" },
   description,
+  metadataBase: new URL(siteUrl),
   authors: [{ name: "Abdulqudus Aremu" }],
-  openGraph: { type: "website", title, description, siteName: "Abdulqudus Aremu" },
-  twitter: { card: "summary", title, description },
+  openGraph: {
+    type: "website",
+    title,
+    description,
+    siteName: "Abdulqudus Aremu",
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "Abdulqudus Aremu, backend engineer" }],
+  },
+  twitter: { card: "summary_large_image", title, description, images: ["/og.png"] },
 };
 
 export const viewport: Viewport = {

@@ -1,12 +1,14 @@
 import Link from "next/link";
 import { Footer } from "../components/Footer";
-import { RecoveryFigure } from "../components/RecoveryFigure";
 import { TopBar } from "../components/TopBar";
+import { Diagram } from "../components/diagrams/Diagram";
+import { registrationDiagram } from "../content/diagrams/registration";
 import {
   alsoShipped,
   designDocs,
   education,
-  glance,
+  facts,
+  figures,
   headline,
   lede,
   press,
@@ -17,8 +19,6 @@ import {
 } from "../content/site";
 
 export default function Home() {
-  const [registrations, subscribers, ...facts] = glance;
-
   return (
     <div className="wrap">
       <TopBar />
@@ -51,7 +51,7 @@ export default function Home() {
           </div>
           <div>
             <p className="label kicker">Backend engineer</p>
-            <h1 id="headline">{headline}</h1>
+            <h1 id="headline" className="long">{headline}</h1>
             <p className="lede">{lede[0]}</p>
             <p>{lede[1]}</p>
           </div>
@@ -61,7 +61,7 @@ export default function Home() {
           <p className="label side">At a glance</p>
           <div>
             <div className="figures">
-              {[registrations, subscribers].map((f) => (
+              {figures.map((f) => (
                 <p key={f.label}>
                   <span className="num">{f.value}</span>
                   <span className="label">{f.label}</span>
@@ -106,7 +106,16 @@ export default function Home() {
               <div>
                 <h3>{doc.published ? <Link href={`/systems/${doc.slug}/`}>{doc.title}</Link> : doc.title}</h3>
                 <p>{doc.summary}</p>
-                {i === 0 && <RecoveryFigure />}
+                {i === 0 && (
+                  <figure className="fig">
+                    <div className="frame">
+                      <Diagram def={registrationDiagram} />
+                    </div>
+                    <figcaption>
+                      The path of one registration. The doc walks through it, including the three places it fails.
+                    </figcaption>
+                  </figure>
+                )}
                 {doc.published ? (
                   <p className="read">
                     <Link href={`/systems/${doc.slug}/`}>Read the design doc</Link>

@@ -6,6 +6,7 @@ import { TopBar } from "../../../components/TopBar";
 import { Diagram } from "../../../components/diagrams/Diagram";
 import { DiagramWalkthrough } from "../../../components/diagrams/DiagramWalkthrough";
 import { feedbackDiagram, feedbackSteps, feedbackUsesDiagram } from "../../../content/diagrams/feedback";
+import { docNumber } from "../../../content/site";
 
 const title = "From raw feedback to a ranked list of problems";
 const dek =
@@ -114,7 +115,7 @@ export default function FeedbackPipelineDoc() {
           </div>
           <div>
             <p className="label kicker">
-              <Link href="/#work">System design</Link> · 1.3
+              <Link href="/#work">System design</Link> · {docNumber("feedback-pipeline")}
             </p>
             <h1>{title}</h1>
             <p className="lede">{dek}</p>

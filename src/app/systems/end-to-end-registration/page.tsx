@@ -6,6 +6,7 @@ import { TopBar } from "../../../components/TopBar";
 import { Diagram } from "../../../components/diagrams/Diagram";
 import { DiagramWalkthrough } from "../../../components/diagrams/DiagramWalkthrough";
 import { registrationDiagram, registrationSteps } from "../../../content/diagrams/registration";
+import { docNumber } from "../../../content/site";
 
 const title = "One registration, end to end";
 const dek =
@@ -137,7 +138,7 @@ export default function EndToEndRegistrationDoc() {
           </div>
           <div>
             <p className="label kicker">
-              <Link href="/#work">System design</Link> · 1.1
+              <Link href="/#work">System design</Link> · {docNumber("end-to-end-registration")}
             </p>
             <h1>{title}</h1>
             <p className="lede">{dek}</p>

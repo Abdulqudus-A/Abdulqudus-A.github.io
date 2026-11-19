@@ -913,3 +913,71 @@ a:hover {
     display: none;
   }
 }
+
+/* ---------- Long headline, three figures ---------- */
+
+.intro h1.long {
+  font-size: clamp(1.875rem, 2.6vw + 0.6rem, 2.75rem);
+  line-height: 1.14;
+  letter-spacing: -0.014em;
+}
+
+.figures {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+}
+
+.figures .num {
+  font-size: 3.25rem;
+}
+
+@media (max-width: 860px) {
+  .figures {
+    gap: 16px;
+  }
+
+  .figures .num {
+    font-size: 2.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .figures {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 22px;
+  }
+}
+
+/* ---------- Diagrams on narrow screens ---------- */
+
+.scroll-hint {
+  display: none;
+}
+
+@media (max-width: 700px) {
+  .scroll-hint {
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .fig figcaption::after {
+    content: " Scroll the diagram sideways to see all of it.";
+  }
+}
+
+/* ---------- Not found ---------- */
+
+.notfound {
+  padding-block: 96px 120px;
+}
+
+.notfound h1 {
+  font-size: clamp(2rem, 3vw + 1rem, 3rem);
+  line-height: 1.1;
+  font-weight: 580;
+  margin-bottom: 20px;
+}
+
+.notfound p {
+  margin-bottom: 14px;
+}

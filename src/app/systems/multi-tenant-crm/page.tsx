@@ -6,6 +6,7 @@ import { TopBar } from "../../../components/TopBar";
 import { Diagram } from "../../../components/diagrams/Diagram";
 import { DiagramWalkthrough } from "../../../components/diagrams/DiagramWalkthrough";
 import { crmDiagram, crmSteps } from "../../../content/diagrams/crm";
+import { docNumber } from "../../../content/site";
 
 const title = "One database, many dealerships";
 const dek =
@@ -105,7 +106,7 @@ export default function MultiTenantCrmDoc() {
           </div>
           <div>
             <p className="label kicker">
-              <Link href="/#work">System design</Link> · 1.5
+              <Link href="/#work">System design</Link> · {docNumber("multi-tenant-crm")}
             </p>
             <h1>{title}</h1>
             <p className="lede">{dek}</p>
