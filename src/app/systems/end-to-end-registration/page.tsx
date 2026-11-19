@@ -273,8 +273,8 @@ export default function EndToEndRegistrationDoc() {
                 first if the second fails. A crash between the two still needs a job that reconciles them.
               </li>
               <li>
-                Long retries can hide problems. A registration that will fail on the fourth day looks the same as one
-                that will succeed in five minutes, unless the reason is recorded with every attempt.
+                Long retries can hide problems. A registration that will fail on its last attempt looks the same as one
+                that will succeed on the next, unless the reason is recorded with every attempt.
               </li>
             </ul>
           </div>
