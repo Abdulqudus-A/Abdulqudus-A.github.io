@@ -2,8 +2,8 @@ import type { DiagramDef } from "../../components/diagrams/Diagram";
 import type { WalkStep } from "../../components/diagrams/DiagramWalkthrough";
 
 // Sources for this file:
-// - How a session is created at sign-in and checked on every request: the auth
-//   service and the shared guard, read on the author's machine.
+// - How a session is created at sign-in and checked on every request: the
+//   author's work on the auth service and the shared guard.
 // - Deliberately left out: key formats, role names, settings, messages and timings.
 
 export const sessionDiagram: DiagramDef = {

@@ -2,8 +2,8 @@ import type { DiagramDef } from "../../components/diagrams/Diagram";
 import type { WalkStep } from "../../components/diagrams/DiagramWalkthrough";
 
 // Sources for this file:
-// - The stages, the order they run in and how each one fails: the platform's
-//   own code and engineering notes, read on the author's machine.
+// - The stages, the order they run in and how each one fails: the author's
+//   work on the platform.
 // - Deliberately left out: service and queue names, endpoints, partner system
 //   names, business rules, thresholds, lock and retry timings.
 

@@ -13,8 +13,12 @@ npm run build    # writes the static site to ./out
 
 ## Deploy
 
-`npm run build` produces plain files in `out/`. Any static host works (Vercel, Netlify, Cloudflare Pages, GitHub Pages).
-Set `NEXT_PUBLIC_SITE_URL` to the final address at build time so the sitemap and sharing image use it:
+Every push to `main` is built and published to GitHub Pages by `.github/workflows/deploy.yml`.
+The site is served at https://abdulqudus-a.github.io.
+
+`npm run build` produces plain files in `out/`, so any static host works (Cloudflare Pages, Netlify, Vercel).
+To move, or to use a custom domain, change `NEXT_PUBLIC_SITE_URL` in the workflow so the sitemap and the
+sharing image use the new address:
 
 ```bash
 NEXT_PUBLIC_SITE_URL=https://example.com npm run build

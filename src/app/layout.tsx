@@ -26,7 +26,7 @@ const description =
   "Senior backend engineer in Lagos. System design write-ups from work for mobile operators, a foreign ministry, universities and companies on three continents.";
 
 // Set NEXT_PUBLIC_SITE_URL at build time once the final address is known.
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://abdulqudus.reavil.io";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://abdulqudus-a.github.io";
 
 export const metadata: Metadata = {
   title: { default: title, template: "%s · Abdulqudus Aremu" },
